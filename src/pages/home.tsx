@@ -1,49 +1,97 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Editor } from '@craftjs/core'
+import { ChevronLeftIcon, SaveIcon } from 'lucide-react'
+
+import { BannerCraft } from '../components/craft/banner'
+import { ButtonCraft } from '../components/craft/button'
+import { CraftConfig } from '../components/craft/config'
+import { GridCraft } from '../components/craft/grid'
+import { InputCraft } from '../components/craft/input'
+import { RootCraft } from '../components/craft/root'
+import { TextareaCraft } from '../components/craft/textarea'
+import { TitleCraft } from '../components/craft/title'
+import { EditorContent } from '../components/editor-content'
+import { Badge } from '../components/ui/badge'
+import { Button } from '../components/ui/button'
+import { Tabs, TabsList, TabsTrigger } from '../components/ui/tabs'
+
 export function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-center font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Comece editando&nbsp;
-          <code className="font-mono font-bold">src/pages/home.tsx</code>
-        </p>
-      </div>
+    <main className="min-h-screen w-full bg-background bg-cover bg-fixed bg-center bg-no-repeat">
+      <Tabs defaultValue="constructor">
+        <div className="pt-5">
+          <header className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between rounded-sm bg-zinc-900 px-4">
+            <div className="flex items-center gap-2">
+              <Button
+                size="icon"
+                type="button"
+                variant="secondary"
+                className="size-12"
+                title="Clique para voltar uma etapa"
+              >
+                <ChevronLeftIcon className="size-6" />
+              </Button>
+              <div className="hidden md:block">
+                <h2 className="font-semibold tracking-tight">
+                  Construtor de formulário
+                </h2>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Crie seu formulário padrão para utilizar
+                </p>
+              </div>
+            </div>
 
-      <div className="before:bg-gradient-radial after:bg-gradient-conic relative flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <img
-          className="pointer-events-none relative size-52 select-none dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert lg:size-96"
-          src="/next.svg"
-          alt="Next.js Logo"
-        />
-      </div>
+            <TabsList>
+              <TabsTrigger value="constructor">Construtor</TabsTrigger>
+              <TabsTrigger value="preview">Pré-visualização</TabsTrigger>
+            </TabsList>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-3 lg:text-left">
-        <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-          <h2 className={`mb-3 text-2xl font-semibold`}>União</h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            A palavra união carrega consigo uma profundidade que transcende sua
-            aparente simplicidade e traz a clareza do que queremos.
-          </p>
+            <div className="flex items-center gap-3">
+              <Badge variant="destructive" className="hidden lg:flex">
+                Alterado
+              </Badge>
+
+              <Button
+                size="icon"
+                type="button"
+                variant="secondary"
+                className="flex lg:hidden"
+                title="Clique para salvar as informações"
+              >
+                <SaveIcon className="size-4" />
+              </Button>
+
+              <Button
+                type="button"
+                variant="secondary"
+                className="hidden lg:flex"
+                title="Clique para salvar as informações"
+              >
+                <SaveIcon className="mr-2 size-4" />
+                Salvar informações
+              </Button>
+            </div>
+          </header>
         </div>
 
-        <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-          <h2 className={`mb-3 text-2xl font-semibold`}>Equipe</h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            A palavra equipe evoca a imagem de pessoas trabalhando juntas em
-            harmonia, cada uma contribuindo com suas habilidades únicas para
-            alcançar um objetivo comum.
-          </p>
-        </div>
+        <div className="pt-6">
+          <Editor
+            resolver={{
+              GridCraft,
+              RootCraft,
+              TitleCraft,
+              InputCraft,
+              BannerCraft,
+              ButtonCraft,
+              TextareaCraft,
+            }}
+          >
+            <EditorContent />
 
-        <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-          <h2 className={`mb-3 text-2xl font-semibold`}>Colaboração</h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            A colaboração é a arte de unir forças em prol de um objetivo comum.
-            Quando pessoas compartilham conhecimentos, habilidades e recursos.
-          </p>
+            <CraftConfig />
+          </Editor>
         </div>
-      </div>
+      </Tabs>
     </main>
   )
 }

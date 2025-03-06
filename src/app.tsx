@@ -10,11 +10,8 @@ import { router } from './router'
 export function App() {
   return (
     <HelmetProvider>
-      <Helmet titleTemplate="%s | Template Nitro HUB Frontend" />
-      <ThemeProvider
-        storageKey="template-nitro-hub-frontend"
-        defaultTheme="dark"
-      >
+      <Helmet titleTemplate="%s | Construtor de formulário" />
+      <ThemeProvider storageKey="craftjs-demo" defaultTheme="dark">
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
 

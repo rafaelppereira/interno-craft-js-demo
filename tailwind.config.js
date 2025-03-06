@@ -12,6 +12,9 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        background: 'url(/background.svg)',
+      },
       fontFamily: {
         sans: 'Plus Jakarta Sans',
       },
